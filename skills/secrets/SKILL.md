@@ -62,10 +62,10 @@ The Go source for all of these tools is in this skill directory (`go.mod`, `cmd/
 cd <skill-dir> && GOBIN=$HOME/.local/bin go install ./cmd/...
 ```
 
-A brand-new host also needs the service account token, which only the user can provide (bootstrap): it's the item "mixable-hosts service account" in DEADBA5E, and it goes in `~/.config/op/token` (mode 600). Pipe it from a host where the user is signed in to 1Password, never through a command line or a chat:
+A brand-new host also needs the service account token, which only the user can provide (bootstrap): it's the item "DEADBA5E service account" in DEADBA5E, and it goes in `~/.config/op/token` (mode 600). Pipe it from a host where the user is signed in to 1Password, never through a command line or a chat:
 
 ```bash
-op read "op://DEADBA5E/mixable-hosts service account/credential" | ssh <new-host> 'umask 077; mkdir -p ~/.config/op; cat > ~/.config/op/token'
+op read "op://DEADBA5E/DEADBA5E service account/credential" | ssh <new-host> 'umask 077; mkdir -p ~/.config/op; cat > ~/.config/op/token'
 ```
 
 Then on the new host: add a `sudo <short hostname>` item to DEADBA5E (the user does this), run `deadba5e-sync`, and install these skills as a Claude Code plugin:

@@ -1,4 +1,4 @@
-// Package opsa runs the 1Password CLI as the "mixable-hosts" service account,
+// Package opsa runs the 1Password CLI as the "DEADBA5E" service account,
 // whose token lives in ~/.config/op/token (read-only access to the DEADBA5E vault).
 package opsa
 

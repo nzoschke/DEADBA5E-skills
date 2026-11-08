@@ -1,4 +1,4 @@
-// deadba5e-op runs the 1Password CLI as the "mixable-hosts" service account
+// deadba5e-op runs the 1Password CLI as the "DEADBA5E" service account
 // (read-only access to the DEADBA5E vault), without touching how plain `op`
 // behaves on the host.
 //
