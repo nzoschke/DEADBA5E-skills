@@ -1,6 +1,6 @@
 {
-  "name": "mixable",
-  "description": "notify (push to iPhone with a Rex link) and secrets (1Password Mixable vault, sudo, SSH keys, Claude over SSH)",
+  "name": "deadba5e",
+  "description": "notify (push to iPhone with a Rex link) and secrets (1Password DEADBA5E vault, sudo, SSH keys, Claude over SSH)",
   "author": { "name": "Noah Zoschke" },
-  "repository": "https://github.com/nzoschke/mixable-skills"
+  "repository": "https://github.com/nzoschke/DEADBA5E-skills"
 }

@@ -1,12 +1,12 @@
 {
-  "name": "mixable",
-  "description": "Agent skills for the Mixable hosts (studio, mini, nuc, exe-rex)",
+  "name": "deadba5e",
+  "description": "Agent skills for the DEADBA5E hosts (studio, mini, nuc, exe-rex)",
   "owner": { "name": "Noah Zoschke" },
   "plugins": [
     {
-      "name": "mixable",
+      "name": "deadba5e",
       "source": "./",
-      "description": "notify (push to iPhone with a Rex link) and secrets (1Password Mixable vault, sudo, SSH keys, Claude over SSH)"
+      "description": "notify (push to iPhone with a Rex link) and secrets (1Password DEADBA5E vault, sudo, SSH keys, Claude over SSH)"
     }
   ]
 }

@@ -1,14 +1,14 @@
-// mixable-notify sends a Pushover notification to the user's phone with an
+// deadba5e-notify sends a Pushover notification to the user's phone with an
 // "Open Rex" link. When run inside a Rex session, it also starts a background
 // helper that jumps Rex for iOS to that session the next time the app
 // reconnects (within 30 minutes; Rex for iOS needs Remote Control enabled).
 //
-//	go run <skill-dir>/mixable-notify/main.go "Refactored auth; tests pass."
-//	echo "summary" | mixable-notify
-//	mixable-notify -t "Custom title" "message"
+//	go run <skill-dir>/deadba5e-notify/main.go "Refactored auth; tests pass."
+//	echo "summary" | deadba5e-notify
+//	deadba5e-notify -t "Custom title" "message"
 //
 // Pushover keys, first found wins: PUSHOVER_USER/PUSHOVER_TOKEN env vars,
-// ~/.config/pushover/credentials, 1Password (op://Mixable/Pushover via the
+// ~/.config/pushover/credentials, 1Password (op://DEADBA5E/Pushover via the
 // service account token in ~/.config/op/token), then the credentials file
 // embedded at build time from this directory.
 //
@@ -60,7 +60,7 @@ func main() {
 
 	title := flag.String("t", "", "title (default: <rex session label> · <host>)")
 	flag.Usage = func() {
-		fmt.Fprintln(os.Stderr, `usage: mixable-notify [-t title] "summary"   (or pipe the summary on stdin)`)
+		fmt.Fprintln(os.Stderr, `usage: deadba5e-notify [-t title] "summary"   (or pipe the summary on stdin)`)
 	}
 	flag.Parse()
 
@@ -99,13 +99,13 @@ func main() {
 
 	if sid != "" && rex != "" {
 		if err := startJump(sid); err != nil {
-			fmt.Fprintln(os.Stderr, "mixable-notify: session jump not started:", err)
+			fmt.Fprintln(os.Stderr, "deadba5e-notify: session jump not started:", err)
 		}
 	}
 }
 
 func fail(msg string) {
-	fmt.Fprintln(os.Stderr, "mixable-notify:", msg)
+	fmt.Fprintln(os.Stderr, "deadba5e-notify:", msg)
 	os.Exit(1)
 }
 
@@ -162,7 +162,7 @@ func opPushover() (user, token string) {
 		}
 		return strings.TrimSpace(string(out))
 	}
-	return read("op://Mixable/Pushover/user key"), read("op://Mixable/Pushover/api token")
+	return read("op://DEADBA5E/Pushover/user key"), read("op://DEADBA5E/Pushover/api token")
 }
 
 func findOp() string {

@@ -1,8 +1,8 @@
-// mixable-sync writes every SSH key in the 1Password Mixable vault to
-// ~/.ssh/mixable/<name> (mode 600) and <name>.pub. Safe to re-run.
+// deadba5e-sync writes every SSH key in the 1Password DEADBA5E vault to
+// ~/.ssh/deadba5e/<name> (mode 600) and <name>.pub. Safe to re-run.
 //
-//	mixable-sync            # sync all SSH keys
-//	ssh -i ~/.ssh/mixable/<name> host
+//	deadba5e-sync            # sync all SSH keys
+//	ssh -i ~/.ssh/deadba5e/<name> host
 package main
 
 import (
@@ -15,15 +15,15 @@ import (
 	"path/filepath"
 	"regexp"
 
-	"mixable-tools/internal/opsa"
+	"deadba5e/internal/opsa"
 )
 
 var unsafeName = regexp.MustCompile(`[^A-Za-z0-9._-]`)
 
 func main() {
 	h, _ := os.UserHomeDir()
-	dir := flag.String("dir", filepath.Join(h, ".ssh/mixable"), "directory to write keys to")
-	vault := flag.String("vault", "Mixable", "1Password vault")
+	dir := flag.String("dir", filepath.Join(h, ".ssh/deadba5e"), "directory to write keys to")
+	vault := flag.String("vault", "DEADBA5E", "1Password vault")
 	flag.Parse()
 
 	ctx := context.Background()
@@ -87,6 +87,6 @@ func writeKey(dir, name string, key []byte) error {
 }
 
 func fail(err error) {
-	fmt.Fprintln(os.Stderr, "mixable-sync:", err)
+	fmt.Fprintln(os.Stderr, "deadba5e-sync:", err)
 	os.Exit(1)
 }

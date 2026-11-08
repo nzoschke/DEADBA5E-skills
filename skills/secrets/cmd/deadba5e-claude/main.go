@@ -1,8 +1,8 @@
-// mixable-claude runs Claude Code with the long-lived subscription token from
-// the 1Password item "Claude Code token" in the Mixable vault, so it works over
+// deadba5e-claude runs Claude Code with the long-lived subscription token from
+// the 1Password item "Claude Code token" in the DEADBA5E vault, so it works over
 // SSH on Macs where the Keychain login is unavailable.
 //
-//	ssh mini mixable-claude -p "Reply with just: ok"
+//	ssh mini deadba5e-claude -p "Reply with just: ok"
 //
 // If CLAUDE_CODE_OAUTH_TOKEN is already set, it is used as is. If the item
 // can't be read, Claude Code runs with its normal login.
@@ -17,12 +17,12 @@ import (
 	"strings"
 	"syscall"
 
-	"mixable-tools/internal/opsa"
+	"deadba5e/internal/opsa"
 )
 
 const (
 	tokenEnv = "CLAUDE_CODE_OAUTH_TOKEN"
-	tokenRef = "op://Mixable/Claude Code token/credential"
+	tokenRef = "op://DEADBA5E/Claude Code token/credential"
 )
 
 func main() {
@@ -37,7 +37,7 @@ func main() {
 				env = append(env, tokenEnv+"="+t)
 			}
 		} else {
-			fmt.Fprintln(os.Stderr, "mixable-claude: no token from 1Password, using normal login:", err)
+			fmt.Fprintln(os.Stderr, "deadba5e-claude: no token from 1Password, using normal login:", err)
 		}
 	}
 	fail(syscall.Exec(claude, append([]string{claude}, os.Args[1:]...), env))
@@ -57,6 +57,6 @@ func findClaude() (string, error) {
 }
 
 func fail(err error) {
-	fmt.Fprintln(os.Stderr, "mixable-claude:", err)
+	fmt.Fprintln(os.Stderr, "deadba5e-claude:", err)
 	os.Exit(1)
 }

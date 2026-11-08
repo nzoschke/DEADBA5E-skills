@@ -5,15 +5,15 @@ description: Send a push notification to the user's iPhone with a short summary 
 
 # notify
 
-Send one push with the Go program bundled in this skill. If `mixable-notify` is on PATH, run that; otherwise `go run` the bundled source using its full path under this skill's directory (the directory this SKILL.md is in):
+Send one push with the Go program bundled in this skill. If `deadba5e-notify` is on PATH, run that; otherwise `go run` the bundled source using its full path under this skill's directory (the directory this SKILL.md is in):
 
 ```bash
-mixable-notify "Migrated the users table and updated the 3 queries that used it. Tests pass; nothing needs you."
+deadba5e-notify "Migrated the users table and updated the 3 queries that used it. Tests pass; nothing needs you."
 # or
-go run <skill-dir>/mixable-notify/main.go "Migrated the users table and updated the 3 queries that used it. Tests pass; nothing needs you."
+go run <skill-dir>/deadba5e-notify/main.go "Migrated the users table and updated the 3 queries that used it. Tests pass; nothing needs you."
 ```
 
-It needs only the Go toolchain (standard library, no module needed). Pushover keys come from env vars, `~/.config/pushover/credentials`, 1Password (`op://Mixable/Pushover`), or the copy embedded from `mixable-notify/credentials`, in that order. Inside a Rex session it also makes Rex for iOS jump to this session when the user taps the notification.
+It needs only the Go toolchain (standard library, no module needed). Pushover keys come from env vars, `~/.config/pushover/credentials`, 1Password (`op://DEADBA5E/Pushover`), or the copy embedded from `deadba5e-notify/credentials`, in that order. Inside a Rex session it also makes Rex for iOS jump to this session when the user taps the notification.
 
 When to send:
 - **Finished the task:** send it as your last step, after the work is verified.
@@ -26,4 +26,4 @@ Writing the summary:
 - No markdown, code blocks or file dumps. Name at most one or two files if it helps.
 - The title is set automatically to `<rex session label> · <host>`. Pass `-t "Title"` only if the user asked for a specific title.
 
-If the command fails (it prints `mixable-notify: ...`), tell the user why in your reply. Don't retry in a loop.
+If the command fails (it prints `deadba5e-notify: ...`), tell the user why in your reply. Don't retry in a loop.
