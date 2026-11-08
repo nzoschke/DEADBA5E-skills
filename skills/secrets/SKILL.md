@@ -68,7 +68,12 @@ A brand-new host also needs the service account token, which only the user can p
 op read "op://Mixable/mixable-hosts service account/credential" | ssh <new-host> 'umask 077; mkdir -p ~/.config/op; cat > ~/.config/op/token'
 ```
 
-Then on the new host: add a `sudo <short hostname>` item to Mixable (the user does this), and run `mixable-sync`.
+Then on the new host: add a `sudo <short hostname>` item to Mixable (the user does this), run `mixable-sync`, and install these skills as a Claude Code plugin:
+
+```bash
+claude plugin marketplace add https://github.com/nzoschke/mixable-skills.git
+claude plugin install mixable@mixable
+```
 
 ## Limits
 
