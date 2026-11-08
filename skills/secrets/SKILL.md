@@ -52,7 +52,7 @@ The `mixable` key is the noah@mixable.net exe.dev account (VMs like `exe-rex.exe
 ssh <host> '~/.local/bin/mixable-claude -p "<task>"'
 ```
 
-Use `mixable-claude`, not plain `claude`, over SSH: on the Macs plain `claude` can't reach its Keychain login and reports "Not logged in". Sessions started this way don't sync claude.ai skills.
+Use `mixable-claude`, not plain `claude`, over SSH: on the Macs plain `claude` can't reach its Keychain login and reports "Not logged in". These sessions get the `mixable` plugin skills but not skills uploaded to claude.ai.
 
 ## Set up a host
 
