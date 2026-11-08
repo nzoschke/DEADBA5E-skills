@@ -1,0 +1,6 @@
+{
+  "name": "mixable",
+  "description": "notify (push to iPhone with a Rex link) and secrets (1Password Mixable vault, sudo, SSH keys, Claude over SSH)",
+  "author": { "name": "Noah Zoschke" },
+  "repository": "https://github.com/nzoschke/mixable-skills"
+}
