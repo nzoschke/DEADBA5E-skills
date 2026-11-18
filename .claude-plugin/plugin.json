@@ -1,6 +1,6 @@
 {
   "name": "deadba5e",
-  "description": "notify (push to iPhone with a Rex link) and secrets (1Password DEADBA5E vault, sudo, SSH keys, Claude over SSH)",
+  "description": "notify (push to iPhone with a Rex link) and secrets (1Password DEADBA5E vault, sudo, SSH keys, Claude over SSH), ssh (find hosts, approval-free SSH between them) and nuc (switch Linux/Windows with boot-to)",
   "author": { "name": "Noah Zoschke" },
   "repository": "https://github.com/nzoschke/DEADBA5E-skills"
 }

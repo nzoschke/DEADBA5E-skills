@@ -11,7 +11,7 @@ Every host has read-only access to the 1Password **DEADBA5E** vault through a se
 |---|---|
 | `deadba5e-op` | The 1Password CLI, signed in as the service account. |
 | `deadba5e-askpass` | Supplies this host's sudo password to `sudo -A`. |
-| `deadba5e-sync` | Writes every SSH key in the vault to `~/.ssh/deadba5e/<name>`. |
+| `deadba5e-sync` | Writes every SSH key in the vault to `~/.ssh/deadba5e/<name>`, and removes ones no longer there. |
 | `deadba5e-claude` | Runs `claude` with the long-lived token from the vault, so Claude Code works over SSH (including on the Macs). |
 
 ## Find and read a secret
@@ -41,10 +41,12 @@ This reads the password from the item `sudo <short hostname>` (for example `sudo
 
 ```bash
 deadba5e-sync                                      # refresh ~/.ssh/deadba5e/ from the vault
-ssh -i ~/.ssh/deadba5e/<name> -o IdentitiesOnly=yes <host>
+ssh -o IdentityAgent=none -o IdentitiesOnly=yes -i ~/.ssh/deadba5e/<name> <host>
 ```
 
-The `mixable` key is the noah@mixable.net exe.dev account (VMs like `exe-rex.exe.xyz`).
+Keep `IdentityAgent=none`: on the Macs, `-i` alone still asks the 1Password agent first, which prompts for Touch ID. The `ssh` skill covers finding hosts and setting up approval-free host-to-host SSH.
+
+The `deadba5e` key is the one host-to-host key. `deadba5e-sync` also deletes keys from `~/.ssh/deadba5e/` once they're gone from the vault.
 
 ## Claude Code on another host
 

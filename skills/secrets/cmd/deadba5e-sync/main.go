@@ -1,5 +1,6 @@
 // deadba5e-sync writes every SSH key in the 1Password DEADBA5E vault to
-// ~/.ssh/deadba5e/<name> (mode 600) and <name>.pub. Safe to re-run.
+// ~/.ssh/deadba5e/<name> (mode 600) and <name>.pub, and removes keys there that
+// are no longer in the vault. Safe to re-run.
 //
 //	deadba5e-sync            # sync all SSH keys
 //	ssh -i ~/.ssh/deadba5e/<name> host
@@ -14,6 +15,7 @@ import (
 	"os/exec"
 	"path/filepath"
 	"regexp"
+	"strings"
 
 	"deadba5e/internal/opsa"
 )
@@ -43,8 +45,10 @@ func main() {
 	}
 
 	n := 0
+	keep := map[string]bool{}
 	for _, it := range items {
 		name := unsafeName.ReplaceAllString(it.Title, "_")
+		keep[name] = true
 		key, err := opsa.Run(ctx, "read", fmt.Sprintf("op://%s/%s/private key?ssh-format=openssh", *vault, it.ID))
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "skip %s: %v\n", it.Title, err)
@@ -58,6 +62,29 @@ func main() {
 		n++
 	}
 	fmt.Printf("%d key(s) synced\n", n)
+	if len(keep) > 0 { // never wipe the directory on an empty listing
+		prune(*dir, keep)
+	}
+}
+
+// prune removes keys in dir (written by an earlier sync) whose item is gone from the vault.
+func prune(dir string, keep map[string]bool) {
+	entries, err := os.ReadDir(dir)
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "prune: %v\n", err)
+		return
+	}
+	for _, e := range entries {
+		name := strings.TrimSuffix(e.Name(), ".pub")
+		if e.IsDir() || strings.HasPrefix(name, ".") || keep[name] {
+			continue
+		}
+		if err := os.Remove(filepath.Join(dir, e.Name())); err != nil {
+			fmt.Fprintf(os.Stderr, "prune %s: %v\n", e.Name(), err)
+			continue
+		}
+		fmt.Printf("removed %s (no longer in vault)\n", e.Name())
+	}
 }
 
 // writeKey validates the key with ssh-keygen, then writes it and its public key atomically.

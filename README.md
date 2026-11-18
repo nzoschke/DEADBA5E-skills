@@ -1,12 +1,14 @@
 # DEADBA5E-skills
 
 Agent skills and Go tools for studio, mini, nuc and exe-rex (Go 1.27+, standard library only).
-This repo is a Claude Code plugin marketplace with one plugin, `deadba5e`, whose skills load as `deadba5e:notify` and `deadba5e:secrets`.
+This repo is a Claude Code plugin marketplace with one plugin, `deadba5e`, whose skills load as `deadba5e:notify`, `deadba5e:secrets`, `deadba5e:ssh` and `deadba5e:nuc`.
 
 | Path | What it is |
 |---|---|
 | `skills/notify` | Skill. `deadba5e-notify "summary"` pushes to the iPhone via Pushover with an Open Rex link and jumps Rex for iOS to the session. Standalone `main.go`, runs with `go run`. |
 | `skills/secrets` | Skill + Go module. How agents use the DEADBA5E vault, plus the source for `deadba5e-op`, `deadba5e-askpass` (sudo -A), `deadba5e-sync` (SSH keys) and `deadba5e-claude` (Claude Code over SSH). |
+| `skills/ssh` | Skill. Find which hosts are up and reachable over SSH, and set up host-to-host SSH with vault keys and no 1Password prompts. |
+| `skills/nuc` | Skill. Switch the nuc between Ubuntu and Windows over SSH with `boot-to`, and recover when it doesn't come back. |
 | `.claude-plugin/` | Marketplace and plugin manifests. No `version`, so every pushed commit is an update. |
 
 Install the plugin on a host (Claude Code):
