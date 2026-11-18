@@ -112,5 +112,4 @@ Report which hosts you authorized and which key you used.
 
 - Vault SSH keys: only `deadba5e`.
 - `deadba5e` is authorized on **mini**, **studio**, **nuc** and **nuc-win**. It is not on **work** (sshd unreachable). exe-rex is Rex-only.
-- The mini's `~/.ssh/config` has a `Host nuc nuc-win studio studio.local` block using `~/.ssh/deadba5e/deadba5e`, so plain `ssh <host>` from the mini skips 1Password. Other hosts need the same block (step 3).
-- The older mini-only key `mini-agent 2026-11-17` (`~/.ssh/id_ed25519_agent`) is no longer used. It's still in nuc's `authorized_keys` and nuc-win's `administrators_authorized_keys` until someone removes it.
+- `~/.ssh/config` on **mini**, **studio** and **nuc** has a `# DEADBA5E hosts` block, so plain `ssh <host>` between them (and to nuc-win) skips 1Password. To add it on another host, put the step 3 block above `Host *`, never above an `Include` line, or it captures the Include.
